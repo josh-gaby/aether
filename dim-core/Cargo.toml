@@ -11,7 +11,7 @@ vaapi = ["nightfall/vaapi"]
 
 [dependencies]
 # git dependencies
-nightfall = { git = "https://github.com/Dusk-Labs/nightfall", tag = "0.3.12-rc4", default-features = false, features = [
+nightfall = { git = "https://github.com/josh-gaby/aether-nightfall", default-features = false, features = [
     "cuda",
     "ssa_transmux",
 ] }
@@ -90,3 +90,6 @@ criterion = { version = "0.3", features = ["async_tokio"] }
 [[bench]]
 name = "movie_scanner"
 harness = false
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(bench)'] }
