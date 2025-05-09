@@ -176,26 +176,26 @@ function VideoPlayer() {
           },
           rules: {
             throughputRule: {
-              active: true
+              active: true,
             },
             bolaRule: {
-              active: false
+              active: false,
             },
             insufficientBufferRule: {
-              active: true
+              active: true,
             },
             switchHistoryRule: {
-              active: false
+              active: false,
             },
             droppedFramesRule: {
-              active: false
+              active: false,
             },
             abandonRequestsRule: {
-              active: false
-            }
-          }
-        }
-      }
+              active: false,
+            },
+          },
+        },
+      },
     };
 
     mediaPlayer.updateSettings(settings);
