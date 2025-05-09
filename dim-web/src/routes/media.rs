@@ -42,8 +42,7 @@ use once_cell::sync::Lazy;
 use serde::Serialize;
 use serde::Deserialize;
 
-use tracing::error;
-use tracing::info;
+use tracing::{error, info};
 
 use displaydoc::Display;
 use thiserror::Error;
