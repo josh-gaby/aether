@@ -167,20 +167,35 @@ function VideoPlayer() {
 
     let settings = {
       debug: {
-        logLevel: Debug.LOG_LEVEL_DEBUG,
+        logLevel: Debug.LOG_LEVEL_INFO,
       },
       streaming: {
-        /* FIXME: Disabling temporarily because the code for this function is unsound
-        gaps: {
-          enableSeekFix: true
-        },
-        */
         abr: {
           autoSwitchBitrate: {
             video: false,
           },
-        },
-      },
+          rules: {
+            throughputRule: {
+              active: true
+            },
+            bolaRule: {
+              active: false
+            },
+            insufficientBufferRule: {
+              active: true
+            },
+            switchHistoryRule: {
+              active: false
+            },
+            droppedFramesRule: {
+              active: false
+            },
+            abandonRequestsRule: {
+              active: false
+            }
+          }
+        }
+      }
     };
 
     mediaPlayer.updateSettings(settings);
@@ -197,16 +212,10 @@ function VideoPlayer() {
     });
 
     const getInitialTrack = (trackArr) => {
-      const trackList =
-        trackArr[0].type === "video" ? videoTracks.list : audioTracks.list;
+      const trackList = trackArr[0].type === "video" ? videoTracks.list : audioTracks.list;
       const defaultTracks = trackList.filter((track) => track.is_default);
-      const defaultTrack =
-        defaultTracks && defaultTracks.length > 0
-          ? defaultTracks[0]
-          : trackList[0];
-      const initialTracks = trackArr.filter(
-        (x) => x.id === defaultTrack.set_id
-      );
+      const defaultTrack = defaultTracks && defaultTracks.length > 0 ? defaultTracks[0] : trackList[0];
+      const initialTracks = trackArr.filter((x) => x.id === defaultTrack.set_id.toString());
       console.log(
         `[${trackArr[0].type}] setting initial track to`,
         initialTracks

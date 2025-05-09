@@ -34,13 +34,13 @@ function VideoEvents() {
 
     window.video = video;
     // we need to do all this shit so that the UI selects the correct tracks.
-    const videoQualityIndex = player.getQualityFor("video");
+    const videoQualityIndex = player.getCurrentRepresentationForType("video");
     const videoQuality =
-      player.getBitrateInfoListFor("video")[videoQualityIndex];
+      player.getRepresentationsByType("video")[videoQualityIndex];
 
     const playerVideoTrackIdx = video.tracks.video.list.filter(
       (track) =>
-        track.bandwidth === videoQuality.bitrate &&
+        track.bandwidth === videoQuality.bitrateInKbit &&
         parseInt(track.height) === videoQuality.height
     );
 
